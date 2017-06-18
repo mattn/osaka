@@ -3,18 +3,23 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"io"
 	"os"
 
 	"github.com/mattn/osaka"
 )
 
 func main() {
-	scanner := bufio.NewScanner(os.Stdin)
-	for scanner.Scan() {
-		fmt.Println(osaka.Encode(scanner.Text()))
-	}
-	if scanner.Err() != nil {
-		fmt.Fprintln(os.Stderr, scanner.Err())
-		os.Exit(1)
+	r := bufio.NewReader(os.Stdin)
+	for {
+		b, _, err := r.ReadLine()
+		if err != nil {
+			if err != io.EOF {
+				fmt.Fprintln(os.Stderr, err)
+				os.Exit(1)
+			}
+			break
+		}
+		fmt.Print(osaka.Encode(string(b)))
 	}
 }
