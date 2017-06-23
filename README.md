@@ -12,7 +12,7 @@ fmt.Println(osaka.Encode("儲かりますか？"))
 ## Installation
 
 ```
-$ go get github.com/mattn/osaka
+$ go get github.com/mattn/osaka/cmd/osaka
 ```
 
 ## License
